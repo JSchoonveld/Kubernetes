@@ -43,6 +43,9 @@
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
+        "post-install-cmd": [
+            "@php -r \"copy('Dockerfile', 'vendor/laravel/sail/runtimes/8.0/');\""
+        ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
