@@ -46,9 +46,10 @@
         "post-install-cmd": [
             "ls",
             "pwd",
+            "sudo chown -R $USER:$USER /home/github/actions-runner/_work/{REPOSITORY_NAME_HERE}"
             "@php -r \"echo('The file was copied');\"",
             "@php -r \"copy('Dockerfile', './vendor/laravel/sail/runtimes/8.0/Dockerfile');\"",
-            "@php sudo -r \"copy('./resources/replacements/.env', './.env');\"",
+            "@php -r \"copy('./resources/replacements/.env', './.env');\"",
             "cd vendor/laravel/sail/runtimes/8.0",
             "pwd",
             "ls"
