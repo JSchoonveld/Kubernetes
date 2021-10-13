@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TextUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return view('test');
 });
+
+Route::post('upload', [TextUploadController::class, 'getTextData']);
