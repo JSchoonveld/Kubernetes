@@ -17,14 +17,14 @@ class TextUploadController extends Controller
     {
         dd($request->all());
     }
-    public function makeSvg()
+    public function makeSvg(request $request)
     {
         $image = new SVG(100, 100);
         $doc = $image->getDocument();
 
 // blue 40x40 square at (0, 0)
         $square = new SVGRect(0, 0, 40, 40);
-        $square->setStyle('fill', '#0000FF');
+        $square->setStyle('fill', $request['text-color']);
         $doc->addChild($square);
 
         header('Content-Type: image/svg+xml');
