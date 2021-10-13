@@ -22,4 +22,4 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::post('upload', [TextUploadController::class, 'getTextData']);
+Route::post('upload', [TextUploadController::class, 'makeSvg']);

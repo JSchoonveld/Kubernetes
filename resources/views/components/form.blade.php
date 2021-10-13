@@ -40,7 +40,7 @@
             </div>
             <div class="col">
                 <div class="container-column">
-                    <label for="text-color">Color</label><input name="text-colo" id="text-color" type="color">
+                    <label for="text-color">Color</label><input name="text-color" id="text-color" type="color">
                 </div>
             </div>
             <div class="col"></div>
