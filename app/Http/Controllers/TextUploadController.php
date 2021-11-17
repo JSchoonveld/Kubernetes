@@ -8,6 +8,7 @@ use SVG\Nodes\Texts\SVGText;
 use SVG\SVG;
 use SVG\Nodes\Shapes\SVGRect;
 use Illuminate\Http\Request;
+
 class TextUploadController extends Controller
 {
     public function create()
@@ -32,13 +33,12 @@ class TextUploadController extends Controller
         $text->setStyle('stroke-width', 1);
         $doc->addChild($text);
 
-        $response = Http::post('svg2png/script.php', ["svg"=>"".$image]);
+        $pngResponse = Http::post('svg2png/script.php', ["svg" => "" . $image]);
 
-        if ($response->ok()) {
-            header('Content-Type: image/png');
-            print($response->body());
-            die();
-        } else{
+        if ($pngResponse->ok()) {
+            return response($pngResponse->body(), 200)
+                ->header('Content-Type', 'image/png');
+        } else {
             throw new Exception("PNG request failed");
         }
     }
