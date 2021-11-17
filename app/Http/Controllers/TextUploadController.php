@@ -20,8 +20,8 @@ class TextUploadController extends Controller
     }
     public static function makeSvg(request $request)
     {
-        $image = new SVG(400, 200);
-        $doc = $image->getDocument();
+        $svgImage = new SVG(400, 200);
+        $doc = $svgImage->getDocument();
         $font = new \SVG\Nodes\Structures\SVGFont('Arial', 'Helvetica, sans-serif');
 
         $text = new SVGText($request['text-body'], 20, 50);
@@ -31,9 +31,14 @@ class TextUploadController extends Controller
         $text->setStyle('stroke-width', 1);
         $doc->addChild($text);
 
-        header('Content-Type: image/svg+xml');
+        $pngResponse = Http::post('svg2png/script.php', ["svg" => "" . $svgImage]);
 
-        Http::post('svg2png/script.php', [$image]);
+        if ($pngResponse->ok()) {
+            return response($pngResponse->body(), 200)
+                ->header('Content-Type', 'image/png');
+        } else {
+            throw new Exception("PNG request failed");
+        }
 
     }
 }
