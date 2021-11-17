@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use SVG\Nodes\Texts\SVGText;
 use SVG\SVG;
@@ -31,7 +32,14 @@ class TextUploadController extends Controller
         $text->setStyle('stroke-width', 1);
         $doc->addChild($text);
 
-        header('Content-Type: image/svg+xml');
-        Http::post('svg2png/script.php', [$image]);
+        $response = Http::post('svg2png/script.php', ["svg"=>"".$image]);
+
+        if ($response->ok()) {
+            header('Content-Type: image/png');
+            print($response->body());
+            die();
+        } else{
+            throw new Exception("PNG request failed");
+        }
     }
 }
