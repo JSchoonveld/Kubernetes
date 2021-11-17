@@ -45,9 +45,13 @@ services:
     svg2png:
         image: jouriroosjen/svg2png:latest
         ports:
-            - 8000:80
+            - 8080:80
+        networks:
+            - svg2png
 networks:
     sail:
+        driver: bridge
+    svg2png:
         driver: bridge
 volumes:
     sailmysql:
