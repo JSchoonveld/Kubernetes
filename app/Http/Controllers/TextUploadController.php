@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use Illuminate\Support\Facades\Http;
 use SVG\Nodes\Texts\SVGText;
 use SVG\SVG;
@@ -25,7 +24,6 @@ class TextUploadController extends Controller
         $doc = $svgImage->getDocument();
         $font = new \SVG\Nodes\Structures\SVGFont('Arial', 'Helvetica, sans-serif');
 
-        // blue 40x40 square at (0, 0)
         $text = new SVGText($request['text-body'], 20, 50);
         $text->setFont($font);
         $text->setSize($request['text-size']);
@@ -41,5 +39,6 @@ class TextUploadController extends Controller
         } else {
             throw new Exception("PNG request failed");
         }
+
     }
 }

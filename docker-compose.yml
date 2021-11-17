@@ -21,7 +21,6 @@ services:
             - '.:/var/www/html'
         networks:
             - sail
-            - svg2png
         depends_on:
             - mysql
     mysql:
@@ -47,12 +46,8 @@ services:
         image: jouriroosjen/svg2png:latest
         ports:
             - 8000:80
-        networks:
-            - svg2png
 networks:
     sail:
-        driver: bridge
-    svg2png:
         driver: bridge
 volumes:
     sailmysql:

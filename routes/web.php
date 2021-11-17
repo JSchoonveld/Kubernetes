@@ -23,3 +23,8 @@ Route::get('/test', function () {
 });
 
 Route::post('upload', [TextUploadController::class, 'makeSvg']);
+
+
+//Route::get('upload', function() {
+//    return 'test';
+//});
