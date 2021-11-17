@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
+use Exception;
+use Illuminate\Support\Facades\Http;
 use SVG\Nodes\Texts\SVGText;
 use SVG\SVG;
 use SVG\Nodes\Shapes\SVGRect;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 
 class TextUploadController extends Controller
 {
- public function create()
+    public function create()
     {
     }
 
@@ -18,13 +19,13 @@ class TextUploadController extends Controller
     {
         dd($request->all());
     }
-    public function makeSvg(request $request)
+    public static function makeSvg(request $request)
     {
         $image = new SVG(400, 200);
         $doc = $image->getDocument();
         $font = new \SVG\Nodes\Structures\SVGFont('Arial', 'Helvetica, sans-serif');
 
-// blue 40x40 square at (0, 0)
+        // blue 40x40 square at (0, 0)
         $text = new SVGText($request['text-body'], 20, 50);
         $text->setFont($font);
         $text->setSize($request['text-size']);
@@ -32,7 +33,13 @@ class TextUploadController extends Controller
         $text->setStyle('stroke-width', 1);
         $doc->addChild($text);
 
-        header('Content-Type: image/svg+xml');
-        echo $image;
+        $pngResponse = Http::post('svg2png/script.php', ["svg" => "" . $image]);
+
+        if ($pngResponse->ok()) {
+            return response($pngResponse->body(), 200)
+                ->header('Content-Type', 'image/png');
+        } else {
+            throw new Exception("PNG request failed");
+        }
     }
 }
