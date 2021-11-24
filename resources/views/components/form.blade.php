@@ -18,8 +18,9 @@
                     <label for="text-family">Lettertype:</label>
                     <select name="text-family" id="text-family" value="">
                         <option value="">Select a font</option>
-                        <option value="Arial, Helvetica, sans-serif">Arial</option>
-                        <option value="Times New Roman, Times, serif">Times New Roman</option>
+                        <option value="Lora, serif">Lora</option>
+                        <option value="Roboto, sans-serif">Roboto</option>
+                        <option value="Open Sans, sans-serif">Open Sans</option>
                     </select>
                 </div>
             </div>
