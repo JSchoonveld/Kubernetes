@@ -23,7 +23,7 @@ class TextUploadController extends Controller
     {
         $svgImage = new SVG(400, 200);
         $doc = $svgImage->getDocument();
-        $font = new \SVG\Nodes\Structures\SVGFont('Arial', 'Helvetica, sans-serif');
+        $font = new \SVG\Nodes\Structures\SVGFont($request['text-family'], '');
 
         $text = new SVGText($request['text-body'], 20, 50);
         $text->setFont($font);
