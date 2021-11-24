@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use SVG\Nodes\Texts\SVGText;
 use SVG\SVG;
