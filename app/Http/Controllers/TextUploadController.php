@@ -28,8 +28,7 @@ class TextUploadController extends Controller
         $text = new SVGText($request['text-body'], 20, 50);
         $text->setFont($font);
         $text->setSize($request['text-size']);
-        $text->setStyle('stroke', $request['text-color']);
-        $text->setStyle('stroke-width', 1);
+        $text->setStyle('fill', $request['text-color']);
         $doc->addChild($text);
 
         $pngResponse = Http::post('svg2png/script.php', ["svg" => "" . $svgImage]);
