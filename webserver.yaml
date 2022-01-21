@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver
+  namespace: jouri
+  labels:
+    app: webfront
+    service: webserver
+spec:
+  ports:
+  - port: 80
+    name: http-webserver
+  selector:
+    app: webfront
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+  namespace: jouri
+  labels:
+    app: webfront
+    version: v1
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: webfront
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: webfront
+        version: v1
+    spec:
+      containers:
+      - name: webserver
+        image: ghcr.io/jschoonveld/kubernetes:master
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "1Gi"
+          requests:
+           memory: "100Mi"
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsUser: 0
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0

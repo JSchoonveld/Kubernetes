@@ -7,7 +7,8 @@ services:
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: sail-8.0/app
+        # image: sail-8.0/app
+        image: ghcr.io/jschoonveld/kubernetes:v1.8
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
